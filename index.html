@@ -2,18 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Gutter Cleaning Estimator</title>
+  <center>
+  <title>Gutter Cleaning Estimator</title></center>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <style>
-    .input-field select {
-      width: 250px !important; /* Limit dropdown width */
-    }
-    label {
-      font-size: 18px !important; /* Increase label font size */
-    }
-  </style>
+<style>
+  .input-field select {
+    width: 250px !important; /* Limit dropdown width */
+  }
+  label {
+    font-size: 18px !important; /* Increase label font size */
+  }
+  .custom-btn {
+    background-color: #4180A4 !important;
+  }
+  /* Change the dropdown text color */
+  .dropdown-content li > span,
+  .dropdown-content li > a {
+    color: #4180A4 !important;
+  }
+  .input-field {
+  margin-bottom: 40px;
+}
+</style>
+
 </head>
 <body>
 
@@ -61,12 +74,12 @@
       <label>Does the home have Gutter Guards?</label>
     </div>
 
-        <button class="btn waves-effect waves-light" onclick="calculateEstimate()">Get Estimate</button>
+        <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="calculateEstimate()">Get Estimate</button>
 
     <h2>Estimated Cost: <span id="estimate"></span></h2>
 
-    <button class="btn waves-effect waves-light" onclick="location.href='mailto:contact@yourcompany.com'">Contact Us</button>
-    <button class="btn waves-effect waves-light" onclick="shareQuote()">Share the Quote via Email</button>
+    <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="location.href='mailto:contact@yourcompany.com'">Contact Us</button>
+    <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="shareQuote()">Share the Quote via Email</button>
   </div>
 
   <!-- Materialize JavaScript -->
@@ -79,32 +92,34 @@
     });
 
     function calculateEstimate() {
-      const gutterLength = document.getElementById('gutterLength').value;
-      const stories = document.getElementById('stories').value;
-      const lastCleaned = document.getElementById('lastCleaned').value;
-      const gutterGuards = document.getElementById('gutterGuards').value;
+  const gutterLength = document.getElementById('gutterLength').value;
+  const stories = document.getElementById('stories').value;
+  const lastCleaned = document.getElementById('lastCleaned').value;
+  const gutterGuards = document.getElementById('gutterGuards').value;
 
-      let cost = 0;
+  let cost = 0;
 
-      if (gutterLength === '1') cost += 50;
-      else if (gutterLength === '2') cost += 100;
-      else if (gutterLength === '3') cost += 150;
-      else if (gutterLength === '4') cost += 200;
-      else if (gutterLength === '5') cost += 250;
+  if (gutterLength === '1') cost += 200;
+  else if (gutterLength === '2') cost += 225;
+  else if (gutterLength === '3') cost += 250;
+  else if (gutterLength === '4') cost += 275;
+  else if (gutterLength === '5') cost += 300;
 
-      if (stories === '1') cost += 0;
-      else if (stories === '2') cost += 50;
-      else if (stories === '3') cost += 100;
+  // Additional costs based on stories
+  if (stories === '1') cost += 0;  // No additional cost for 2 stories
+  else if (stories === '2')  cost *= 1.10; // Adding 10%
+  else if (stories === '3') cost *= 1.15;  // Adding 15%
 
-      if (lastCleaned === '1') cost += 0;
-      else if (lastCleaned === '2') cost += 20;
-      else if (lastCleaned === '3') cost += 40;
+  if (lastCleaned === '1') cost += 0;
+  else if (lastCleaned === '2') cost *= 1.10; // Adding 10%
+  else if (lastCleaned === '3') cost *= 1.20; // Adding 20%
 
-      if (gutterGuards === '1') cost += 20;
-      else if (gutterGuards === '2') cost += 0;
+  if (gutterGuards === '1') cost *= 1.15;  // Adding 15%
+  else if (gutterGuards === '2') cost += 0;
 
-      document.getElementById('estimate').innerText = '$' + cost;
-    }
+  document.getElementById('estimate').innerText = '$' + Math.round(cost);
+}
+
       
       function shareQuote() {
       const estimate = document.getElementById('estimate').innerText;
