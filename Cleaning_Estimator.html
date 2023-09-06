@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gutter Cleaning Estimator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    .input-field select {
+      width: 250px !important; /* Limit dropdown width */
+    }
+    label {
+      font-size: 18px !important; /* Increase label font size */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Gutter Cleaning Estimator</h1>
+
+    <div class="input-field">
+      <select id="gutterLength">
+        <option value="0" disabled selected>Select</option>
+        <option value="1">Less than 75</option>
+        <option value="2">75 - 100</option>
+        <option value="3">100 - 125</option>
+        <option value="4">125 - 150</option>
+        <option value="5">150 - 200</option>
+      </select>
+      <label>How many feet of Gutter on your home?</label>
+    </div>
+
+    <div class="input-field">
+      <select id="stories">
+        <option value="0" disabled selected>Select</option>
+        <option value="1">1 Story</option>
+        <option value="2">2 Stories</option>
+        <option value="3">3 Stories</option>
+      </select>
+      <label>Number of stories the home is?</label>
+    </div>
+
+    <div class="input-field">
+      <select id="lastCleaned">
+        <option value="0" disabled selected>Select</option>
+        <option value="1">Less than 6 months ago</option>
+        <option value="2">6 - 12 months ago</option>
+        <option value="3">More than a year ago</option>
+      </select>
+      <label>When were the gutters last cleaned?</label>
+    </div>
+
+    <div class="input-field">
+      <select id="gutterGuards">
+        <option value="0" disabled selected>Select</option>
+        <option value="1">Yes</option>
+        <option value="2">No</option>
+      </select>
+      <label>Does the home have Gutter Guards?</label>
+    </div>
+
+        <button class="btn waves-effect waves-light" onclick="calculateEstimate()">Get Estimate</button>
+
+    <h2>Estimated Cost: <span id="estimate"></span></h2>
+
+    <button class="btn waves-effect waves-light" onclick="location.href='mailto:contact@yourcompany.com'">Contact Us</button>
+    <button class="btn waves-effect waves-light" onclick="shareQuote()">Share the Quote via Email</button>
+  </div>
+
+  <!-- Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // Initialize Materialize select elements
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems);
+    });
+
+    function calculateEstimate() {
+      const gutterLength = document.getElementById('gutterLength').value;
+      const stories = document.getElementById('stories').value;
+      const lastCleaned = document.getElementById('lastCleaned').value;
+      const gutterGuards = document.getElementById('gutterGuards').value;
+
+      let cost = 0;
+
+      if (gutterLength === '1') cost += 50;
+      else if (gutterLength === '2') cost += 100;
+      else if (gutterLength === '3') cost += 150;
+      else if (gutterLength === '4') cost += 200;
+      else if (gutterLength === '5') cost += 250;
+
+      if (stories === '1') cost += 0;
+      else if (stories === '2') cost += 50;
+      else if (stories === '3') cost += 100;
+
+      if (lastCleaned === '1') cost += 0;
+      else if (lastCleaned === '2') cost += 20;
+      else if (lastCleaned === '3') cost += 40;
+
+      if (gutterGuards === '1') cost += 20;
+      else if (gutterGuards === '2') cost += 0;
+
+      document.getElementById('estimate').innerText = '$' + cost;
+    }
+      
+      function shareQuote() {
+      const estimate = document.getElementById('estimate').innerText;
+      const subject = 'Your Gutter Cleaning Estimate';
+      const body = `Here is your estimated cost for gutter cleaning: ${estimate}`;
+      location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+  </script>
+
+</body>
+</html>
