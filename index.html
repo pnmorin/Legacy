@@ -27,7 +27,8 @@
 }
 .error-message {
   color: red;
-  font-size: 12px;
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>
 
@@ -156,7 +157,7 @@ function calculateEstimate() {
 }
 
       
-      function shareOrTextQuote() {
+function shareOrTextQuote() {
   const estimate = document.getElementById('estimate').innerText;
   const subject = 'Your Gutter Cleaning Estimate';
   const body = `Here is your estimated cost for gutter cleaning: ${estimate}`;
@@ -165,12 +166,13 @@ function calculateEstimate() {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     // Create an SMS link
     const smsBody = encodeURIComponent(body);
-    location.href = `sms:?body=${smsBody}`;
+    location.href = `sms:?&body=${smsBody}`;
   } else {
     // Create an email link
     location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 }
+
 
   </script>
 
