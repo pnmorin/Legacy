@@ -90,7 +90,7 @@
     <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="location.href='mailto:contact@yourcompany.com'">Contact Us</button>
 
 <!-- Share button -->
-<button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="document.getElementById('shareModal').style.display='block'">Share</button>
+<button id="shareButton" class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="document.getElementById('shareModal').style.display='block'">Share</button>
 
 <!-- Modal-like HTML at the end of the body -->
 <div id="shareModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); z-index:1000;">
@@ -112,6 +112,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('select');
       var instances = M.FormSelect.init(elems);
+      document.getElementById('shareButton').disabled = true;  // Add this line
     });
 
 function calculateEstimate() {
@@ -166,23 +167,61 @@ function calculateEstimate() {
   if (gutterGuards === '1') cost *= 1.15;  // Adding 15%
   else if (gutterGuards === '2') cost += 0;
 
+  const estimate = Math.round(cost);
+
+  console.log('Estimate:', estimate);  // Debugging line
+  
+// Enable or disable the "Share" button based on the estimate
+    if (estimate > 0) {
+       console.log('Enabling Share button');  // Debugging line
+      document.getElementById('shareButton').disabled = false;
+    } else {
+      console.log('Disabling Share button');  // Debugging line
+      document.getElementById('shareButton').disabled = true;
+    }
+
   document.getElementById('estimate').innerText = '$' + Math.round(cost);
 }
 
       
-function shareQuote(method) {
-  document.getElementById('shareModal').style.display='none'; // Hide modal
+function shareQuote() {
+  // Get the estimated cost
   const estimate = document.getElementById('estimate').innerText;
-  const subject = 'Your Gutter Cleaning Estimate';
-  const body = `Here is your estimated cost for gutter cleaning: ${estimate}`;
 
-  if (method === 'email') {
-    location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  } else if (method === 'sms') {
-    const smsBody = encodeURIComponent(body);
-    location.href = `sms:?&body=${smsBody}`;
+  // Get selected text for each question
+  const gutterLengthText = document.querySelector("#gutterLength option:checked").text;
+  const storiesText = document.querySelector("#stories option:checked").text;
+  const lastCleanedText = document.querySelector("#lastCleaned option:checked").text;
+  const gutterGuardsText = document.querySelector("#gutterGuards option:checked").text;
+
+  const additionalContent = "This is an estimate and not a quote. Legacy Gutter Solutions may need to adjust the price depending upon assessment of the job. No work will be performed until the customer agrees upon the final price.";
+  
+  const subject = 'Your Gutter Cleaning Estimate';
+  const body = `Here is your estimated cost for gutter cleaning: ${estimate}
+  - How many feet of Gutter on your home?: ${gutterLengthText}
+  - Number of stories the home is?: ${storiesText}
+  - When were the gutters last cleaned?: ${lastCleanedText}
+  - Does the home have Gutter Guards?: ${gutterGuardsText}
+  
+  ${additionalContent}`;
+
+  const emailBody = encodeURIComponent(body);
+  const emailSubject = encodeURIComponent(subject);
+  
+  const userAgent = navigator.userAgent || navigator.vendor;
+
+  if (/android/i.test(userAgent)) {
+    // Trigger SMS for Android
+    window.location.href = `sms:?body=${emailBody}`;
+  } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+    // Trigger SMS for iOS
+    window.location.href = `sms:&body=${emailBody}`;
+  } else {
+    // Trigger email for other devices
+    window.location.href = `mailto:?subject=${emailSubject}&body=${emailBody}`;
   }
 }
+
 
 
   </script>
