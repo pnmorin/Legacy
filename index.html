@@ -88,7 +88,20 @@
     <h2>Estimated Cost: <span id="estimate"></span></h2>
 
     <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="location.href='mailto:contact@yourcompany.com'">Contact Us</button>
-<button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="shareOrTextQuote()">Share Estimate</button>
+
+<!-- Share button -->
+<button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="document.getElementById('shareModal').style.display='block'">Share</button>
+
+<!-- Modal-like HTML at the end of the body -->
+<div id="shareModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); z-index:1000;">
+  <div style="margin: 15% auto; padding: 20px; background-color:#fff; width: 300px; text-align:center;">
+    <h4>Share Estimate</h4>
+    <button onclick="shareQuote('email')">Share via Email</button>
+    <button onclick="shareQuote('sms')">Share via SMS</button>
+    <button onclick="document.getElementById('shareModal').style.display='none'">Cancel</button>
+  </div>
+</div>
+
 
   </div>
 
@@ -157,19 +170,17 @@ function calculateEstimate() {
 }
 
       
-function shareOrTextQuote() {
+function shareQuote(method) {
+  document.getElementById('shareModal').style.display='none'; // Hide modal
   const estimate = document.getElementById('estimate').innerText;
   const subject = 'Your Gutter Cleaning Estimate';
   const body = `Here is your estimated cost for gutter cleaning: ${estimate}`;
 
-  // Detect if the user is on a mobile device
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    // Create an SMS link
+  if (method === 'email') {
+    location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  } else if (method === 'sms') {
     const smsBody = encodeURIComponent(body);
     location.href = `sms:?&body=${smsBody}`;
-  } else {
-    // Create an email link
-    location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 }
 
