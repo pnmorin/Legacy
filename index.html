@@ -25,6 +25,10 @@
   .input-field {
   margin-bottom: 40px;
 }
+.error-message {
+  color: red;
+  font-size: 12px;
+}
 </style>
 
 </head>
@@ -43,6 +47,7 @@
         <option value="5">150 - 200</option>
       </select>
       <label>How many feet of Gutter on your home?</label>
+      <span class="error-message" id="gutterLengthError"></span>
     </div>
 
     <div class="input-field">
@@ -53,6 +58,7 @@
         <option value="3">3 Stories</option>
       </select>
       <label>Number of stories the home is?</label>
+       <span class="error-message" id="storiesError"></span>
     </div>
 
     <div class="input-field">
@@ -63,6 +69,7 @@
         <option value="3">More than a year ago</option>
       </select>
       <label>When were the gutters last cleaned?</label>
+      <span class="error-message" id="lastCleanedError"></span>
     </div>
 
     <div class="input-field">
@@ -72,14 +79,16 @@
         <option value="2">No</option>
       </select>
       <label>Does the home have Gutter Guards?</label>
+      <span class="error-message" id="gutterGuardsError"></span>
     </div>
 
-        <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="calculateEstimate()">Get Estimate</button>
+        <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="return calculateEstimate()">Get Estimate</button>
 
     <h2>Estimated Cost: <span id="estimate"></span></h2>
 
     <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="location.href='mailto:contact@yourcompany.com'">Contact Us</button>
-    <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="shareQuote()">Share the Quote via Email</button>
+<button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="shareOrTextQuote()">Share Estimate</button>
+
   </div>
 
   <!-- Materialize JavaScript -->
@@ -91,12 +100,38 @@
       var instances = M.FormSelect.init(elems);
     });
 
-    function calculateEstimate() {
+function calculateEstimate() {
+  // Fetch values
   const gutterLength = document.getElementById('gutterLength').value;
   const stories = document.getElementById('stories').value;
   const lastCleaned = document.getElementById('lastCleaned').value;
   const gutterGuards = document.getElementById('gutterGuards').value;
 
+  // Reset error messages
+  document.getElementById('gutterLengthError').innerText = '';
+  document.getElementById('storiesError').innerText = '';
+  document.getElementById('lastCleanedError').innerText = '';
+  document.getElementById('gutterGuardsError').innerText = '';
+
+  // Check for empty selections and show error messages
+  if (!gutterLength || gutterLength === '0') {
+    document.getElementById('gutterLengthError').innerText = 'Please select a gutter length.';
+    return false;
+  }
+  if (!stories || stories === '0') {
+    document.getElementById('storiesError').innerText = 'Please select the number of stories.';
+    return false;
+  }
+  if (!lastCleaned || lastCleaned === '0') {
+    document.getElementById('lastCleanedError').innerText = 'Please select the last cleaned timing.';
+    return false;
+  }
+  if (!gutterGuards || gutterGuards === '0') {
+    document.getElementById('gutterGuardsError').innerText = 'Please select if you have gutter guards or not.';
+    return false;
+  }
+
+  // Rest of your calculation code
   let cost = 0;
 
   if (gutterLength === '1') cost += 200;
@@ -121,12 +156,22 @@
 }
 
       
-      function shareQuote() {
-      const estimate = document.getElementById('estimate').innerText;
-      const subject = 'Your Gutter Cleaning Estimate';
-      const body = `Here is your estimated cost for gutter cleaning: ${estimate}`;
-      location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }
+      function shareOrTextQuote() {
+  const estimate = document.getElementById('estimate').innerText;
+  const subject = 'Your Gutter Cleaning Estimate';
+  const body = `Here is your estimated cost for gutter cleaning: ${estimate}`;
+
+  // Detect if the user is on a mobile device
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // Create an SMS link
+    const smsBody = encodeURIComponent(body);
+    location.href = `sms:?body=${smsBody}`;
+  } else {
+    // Create an email link
+    location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+}
+
   </script>
 
 </body>
