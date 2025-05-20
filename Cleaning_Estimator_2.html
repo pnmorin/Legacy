@@ -6,61 +6,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <style>
-  .input-field select {
-    width: 250px !important; /* Limit dropdown width */
-  }
-  label {
-    font-size: 18px !important; /* Increase label font size */
-  }
-  .custom-btn {
-    background-color: #4180A4 !important;
-  }
-  /* Change the dropdown text color */
-  .dropdown-content li > span,
-  .dropdown-content li > a {
-    color: #4180A4 !important;
-  }
-  .input-field {
-  margin-bottom: 40px;
-}
-.error-message {
-  color: red;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.what-to-expect {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.what-to-expect-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.what-to-expect-list {
-  padding-left: 20px;
-  margin-top: 0;
-}
-
-.what-to-expect-item {
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-
-.what-to-expect-strong {
-  font-weight: bold;
-}
-.hidden {
+    .input-field select {
+      width: 250px !important; /* Limit dropdown width */
+    }
+    label {
+      font-size: 18px !important; /* Increase label font size */
+    }
+    .custom-btn {
+      background-color: #4180A4 !important;
+    }
+    /* Change the dropdown text color */
+    .dropdown-content li > span,
+    .dropdown-content li > a {
+      color: #4180A4 !important;
+    }
+    .input-field {
+      margin-bottom: 40px;
+    }
+    .error-message {
+      color: red;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .what-to-expect {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .what-to-expect-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .what-to-expect-list {
+      padding-left: 20px;
+      margin-top: 0;
+    }
+    .what-to-expect-item {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .what-to-expect-strong {
+      font-weight: bold;
+    }
+    .hidden {
       display: none;
     }
   </style>
 </head>
 <body>
-
- <div class="container">
+  <div class="container">
     <h1>Gutter Cleaning Estimator</h1>
 
     <div class="input-field col s12">
@@ -84,7 +78,7 @@
         <option value="3">3 Stories</option>
       </select>
       <label>Number of stories the home is?</label>
-       <span class="error-message" id="storiesError"></span>
+      <span class="error-message" id="storiesError"></span>
     </div>
 
     <div class="input-field col s12">
@@ -108,11 +102,11 @@
       <span class="error-message" id="gutterGuardsError"></span>
     </div>
 
-        <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="return calculateEstimate()">Get Estimate</button>
+    <button class="btn waves-effect waves-light" style="background-color: #4180A4;" onclick="return calculateEstimate()">Get Estimate</button>
 
-   <div id="postEstimation" class="hidden">
+    <div id="postEstimation" class="hidden">
       <h2>Estimated Cost: <span id="estimate"></span></h2>
-    <button class="btn waves-effect waves-light custom-btn" onclick="contactUs()">Contact Us Today</button>
+      <button class="btn waves-effect waves-light custom-btn" onclick="contactUs()">Contact Us Today</button>
       <button class="btn waves-effect waves-light custom-btn" onclick="document.getElementById('shareModal').style.display='block'">Share</button>
 
       <div id="maintenancePlanOffer" class="what-to-expect hidden">
@@ -128,261 +122,238 @@
           <span>Yes, tell me more about the Maintenance Plan</span>
         </label>
       </div>
+    </div>
 
+    <div class="what-to-expect hidden">
+      <h3 class="what-to-expect-title">Congratulations on Receiving Your Estimate!</h3>
+      <p>Now that you have your gutter estimate in hand, it's time to take the next steps toward cleaner, more efficient gutters. Here's what you can expect from our seamless process:</p>
+      <ol class="what-to-expect-list">
+        <li class="what-to-expect-item">
+          <strong class="what-to-expect-strong">Step 1: Contact Us</strong>
+          <p>Ready to get started? Contact us to schedule a convenient time for an assessment. We're here to answer your questions and set up an appointment that works for you.</p>
+        </li>
+        <li class="what-to-expect-item">
+          <strong class="what-to-expect-strong">Step 2: Assessment</strong>
+          <p>Our experienced team will visit your property to assess your gutters thoroughly. During this assessment, we'll provide you with a final, accurate quote based on your specific needs.</p>
+        </li>
+        <li class="what-to-expect-item">
+          <strong class="what-to-expect-strong">Step 3: Immediate Cleaning Option</strong>
+          <p>If you're ready to enhance your gutter system right away, we offer an immediate cleaning option. With your approval, we can efficiently clean your gutters immediately after the assessment, ensuring they are in top-notch condition.</p>
+        </li>
+      </ol>
+      <p>Don't hesitate to get in touch with any questions or to schedule your assessment. We're here to make your gutter maintenance hassle-free and effective.</p>
+      <p>This is an estimate and not a quote. Legacy Gutter Solutions may need to adjust the price depending upon an assessment of the job. No work will be performed until the customer agrees upon the final price.</p>
+    </div>
 
-<!-- Modal-like HTML at the end of the body -->
-<div id="shareModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); z-index:1000;">
-  <div style="margin: 15% auto; padding: 20px; background-color:#fff; width: 300px; text-align:center;">
-    <h4>Share Estimate</h4>
-    <button onclick="shareQuote('email')">Share via Email</button>
-    <button onclick="shareQuote('sms')">Share via SMS</button>
-    <button onclick="document.getElementById('shareModal').style.display='none'">Cancel</button>
-  </div>
-</div>
+    <div class="Contact-us-today hidden">
+      <button class="btn waves-effect waves-light custom-btn" onclick="contactUs()">Contact Us Today</button>
+    </div>
 
+    <div id="shareModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); z-index:1000;">
+      <div style="margin: 15% auto; padding: 20px; background-color:#fff; width: 300px; text-align:center;">
+        <h4>Share Estimate</h4>
+        <button class="btn waves-effect waves-light custom-btn" onclick="shareQuote('email')">Share via Email</button>
+        <button class="btn waves-effect waves-light custom-btn" onclick="shareQuote('sms')">Share via SMS</button>
+        <button class="btn waves-effect waves-light" onclick="document.getElementById('shareModal').style.display='none'">Cancel</button>
+      </div>
+    </div>
 
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <h4>Contact Information</h4>
+        <div class="input-field">
+          <input id="userName" type="text" class="validate">
+          <label for="userName">Name</label>
+        </div>
+        <div class="input-field">
+          <input id="userEmail" type="email" class="validate">
+          <label for="userEmail">Email</label>
+        </div>
+        <div class="input-field">
+          <input id="userPhone" type="tel" class="validate">
+          <label for="userPhone">Phone Number</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn waves-effect waves-light custom-btn" onclick="submitContactInfo()">Submit</button>
+      </div>
+    </div>
   </div>
 
   <!-- Materialize JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
-    // Initialize Materialize select elements
+    // Initialize Materialize components
     document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems);
+      var selectElems = document.querySelectorAll('select');
+      M.FormSelect.init(selectElems);
+
+      var modalElems = document.querySelectorAll('.modal');
+      M.Modal.init(modalElems);
     });
-      
-   document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.modal');
-  var instances = M.Modal.init(elems);
-});   
 
-function calculateEstimate() {
-  // Fetch values
-  const gutterLength = document.getElementById('gutterLength').value;
-  const stories = document.getElementById('stories').value;
-  const lastCleaned = document.getElementById('lastCleaned').value;
-  const gutterGuards = document.getElementById('gutterGuards').value;
+    function calculateEstimate() {
+      // Fetch values
+      const gutterLength = document.getElementById('gutterLength').value;
+      const stories = document.getElementById('stories').value;
+      const lastCleaned = document.getElementById('lastCleaned').value;
+      const gutterGuards = document.getElementById('gutterGuards').value;
 
-  // Reset error messages
-  document.getElementById('gutterLengthError').innerText = '';
-  document.getElementById('storiesError').innerText = '';
-  document.getElementById('lastCleanedError').innerText = '';
-  document.getElementById('gutterGuardsError').innerText = '';
+      // Reset error messages
+      document.getElementById('gutterLengthError').innerText = '';
+      document.getElementById('storiesError').innerText = '';
+      document.getElementById('lastCleanedError').innerText = '';
+      document.getElementById('gutterGuardsError').innerText = '';
 
-  // Check for empty selections and show error messages
-  if (!gutterLength || gutterLength === '0') {
-    document.getElementById('gutterLengthError').innerText = 'Please select a gutter length.';
-    return false;
-  }
-  if (!stories || stories === '0') {
-    document.getElementById('storiesError').innerText = 'Please select the number of stories.';
-    return false;
-  }
-  if (!lastCleaned || lastCleaned === '0') {
-    document.getElementById('lastCleanedError').innerText = 'Please select the last cleaned timing.';
-    return false;
-  }
-  if (!gutterGuards || gutterGuards === '0') {
-    document.getElementById('gutterGuardsError').innerText = 'Please select if you have gutter guards or not.';
-    return false;
-  }
+      // Check for empty selections and show error messages
+      if (!gutterLength || gutterLength === '0') {
+        document.getElementById('gutterLengthError').innerText = 'Please select a gutter length.';
+        return false;
+      }
+      if (!stories || stories === '0') {
+        document.getElementById('storiesError').innerText = 'Please select the number of stories.';
+        return false;
+      }
+      if (!lastCleaned || lastCleaned === '0') {
+        document.getElementById('lastCleanedError').innerText = 'Please select the last cleaned timing.';
+        return false;
+      }
+      if (!gutterGuards || gutterGuards === '0') {
+        document.getElementById('gutterGuardsError').innerText = 'Please select if you have gutter guards or not.';
+        return false;
+      }
 
-  // Rest of your calculation code
-  let cost = 0;
+      // Calculate cost
+      let cost = 0;
+      if (gutterLength === '1') cost = 200;
+      else if (gutterLength === '2') cost = 225;
+      else if (gutterLength === '3') cost = 250;
+      else if (gutterLength === '4') cost = 275;
+      else if (gutterLength === '5') cost = 300;
 
-  if (gutterLength === '1') cost += 200;
-  else if (gutterLength === '2') cost += 225;
-  else if (gutterLength === '3') cost += 250;
-  else if (gutterLength === '4') cost += 275;
-  else if (gutterLength === '5') cost += 300;
+      if (stories === '2') cost *= 1.10;
+      else if (stories === '3') cost *= 1.15;
 
-  // Additional costs based on stories
-  if (stories === '1') cost += 0;  // No additional cost for 2 stories
-  else if (stories === '2')  cost *= 1.10; // Adding 10%
-  else if (stories === '3') cost *= 1.15;  // Adding 15%
+      if (lastCleaned === '2') cost *= 1.10;
+      else if (lastCleaned === '3') cost *= 1.20;
 
-  if (lastCleaned === '1') cost += 0;
-  else if (lastCleaned === '2') cost *= 1.10; // Adding 10%
-  else if (lastCleaned === '3') cost *= 1.20; // Adding 20%
+      if (gutterGuards === '1') cost *= 1.15;
 
-  if (gutterGuards === '1') cost *= 1.15;  // Adding 15%
-  else if (gutterGuards === '2') cost += 0;
+      const estimate = Math.round(cost);
 
-  const estimate = Math.round(cost);
+      // Update UI
+      const postEstimation = document.getElementById('postEstimation');
+      const maintenancePlanOffer = document.getElementById('maintenancePlanOffer');
+      const whatToExpect = document.querySelector('.what-to-expect');
+      const contactUsDiv = document.querySelector('.Contact-us-today');
 
-  console.log('Estimate:', estimate);  // Debugging line
-  
-// Enable or disable the "Share" button based on the estimate
-    if (estimate > 0) {
-  console.log('Enabling Share button');  // Debugging line
-  
-  // Unhide the postEstimation and what-to-expect sections
-  document.getElementById('postEstimation').classList.remove('hidden');
-  document.querySelector('.what-to-expect').classList.remove('hidden');
-    document.querySelector('.Contact-us-today').classList.remove('hidden');
-    document.getElementById('maintenancePlanOffer').classList.remove('hidden');
+      postEstimation.classList.remove('hidden');
+      maintenancePlanOffer.classList.remove('hidden');
+      whatToExpect.classList.remove('hidden');
+      contactUsDiv.classList.remove('hidden');
 
-
-  document.getElementById('estimate').innerText = '$' + estimate;
-  
-
-} else {
-  console.log('Disabling Share button');  // Debugging line
-  
-  // Hide the postEstimation and what-to-expect sections
-  document.getElementById('postEstimation').classList.add('hidden');
-  document.querySelector('.what-to-expect').classList.add('hidden');
-    document.querySelector('.Contact-us-today').classList.add('hidden');
-}
-
-
-  document.getElementById('estimate').innerText = '$' + Math.round(cost);
-
-}
-
-      
-function shareQuote() {
-  // Get the estimated cost
-  const estimate = document.getElementById('estimate').innerText;
-    const whatToExpectContent = document.querySelector('.what-to-expect').innerText;
-  // Get selected text for each question
-  const gutterLengthText = document.querySelector("#gutterLength option:checked").text;
-  const storiesText = document.querySelector("#stories option:checked").text;
-  const lastCleanedText = document.querySelector("#lastCleaned option:checked").text;
-  const gutterGuardsText = document.querySelector("#gutterGuards option:checked").text;
-
-  const additionalContent = "";
-  
- const subject = 'Your Gutter Cleaning Estimate';
-  const body = `Here is your estimated cost for gutter cleaning: ${estimate}
-  - How many feet of Gutter on your home?: ${gutterLengthText}
-  - Number of stories the home is?: ${storiesText}
-  - When were the gutters last cleaned?: ${lastCleanedText}
-  - Does the home have Gutter Guards?: ${gutterGuardsText}
-  
-  ${additionalContent}
-
-  What to Expect:
-  ${whatToExpectContent}`;
-    
-    
-
-  const emailBody = encodeURIComponent(body);
-  const emailSubject = encodeURIComponent(subject);
-  
-  const userAgent = navigator.userAgent || navigator.vendor;
-
-  if (/android/i.test(userAgent)) {
-    // Trigger SMS for Android
-    window.location.href = `sms:?body=${emailBody}`;
-  } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-    // Trigger SMS for iOS
-    window.location.href = `sms:&body=${emailBody}`;
-  } else {
-    // Trigger email for other devices
-    window.location.href = `mailto:?subject=${emailSubject}&body=${emailBody}`;
-  }
-}
-
-
-function contactUs() {
-  var instance = M.Modal.getInstance(document.getElementById('contactModal'));
-  instance.open();
-}
-
-// Function to submit contact information
-function submitContactInfo() {
-  const userName = document.getElementById('userName').value;
-  const userEmail = document.getElementById('userEmail').value;
-  const userPhone = document.getElementById('userPhone').value;
-  const gutterLengthText = document.querySelector("#gutterLength option:checked").text;
-  const storiesText = document.querySelector("#stories option:checked").text;
-  const lastCleanedText = document.querySelector("#lastCleaned option:checked").text;
-  const gutterGuardsText = document.querySelector("#gutterGuards option:checked").text;
-  const estimate = document.getElementById('estimate').innerText;
-  const maintenancePlan = document.getElementById('interestedInPlan').checked ? "Yes" : "No";
-
-  const payload = {
-    name: userName,
-    email: userEmail,
-    phone: userPhone,
-    gutterLength: gutterLengthText,
-    stories: storiesText,
-    lastCleaned: lastCleanedText,
-    gutterGuards: gutterGuardsText,
-    estimate: estimate,
-    maintenancePlan: maintenancePlan
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbyQHotrGeA8Ud5vT9GcDF3mLitUCOasCKxfF2PU29nvZTHbYWXtj3dH-dhjZrcV0kCA1A/exec",{
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      "Content-Type": "application/json"
+      document.getElementById('estimate').innerText = `$${estimate}`;
     }
-  }).then(response => {
-    if (response.ok) {
-      M.toast({ html: 'Submitted successfully!' });
-      var instance = M.Modal.getInstance(document.getElementById('contactModal'));
-      instance.close();
-    } else {
-      M.toast({ html: 'Submission failed. Please try again.' });
-    }
-  });
-}
 
-      
+    function shareQuote(method) {
+      const estimate = document.getElementById('estimate').innerText;
+      const gutterLengthText = document.querySelector("#gutterLength option:checked").text;
+      const storiesText = document.querySelector("#stories option:checked").text;
+      const lastCleanedText = document.querySelector("#lastCleaned option:checked").text;
+      const gutterGuardsText = document.querySelector("#gutterGuards option:checked").text;
+      const whatToExpectContent = document.querySelector('.what-to-expect').innerText;
+
+      const subject = 'Your Gutter Cleaning Estimate';
+      const body = `Here is your estimated cost for gutter cleaning: ${estimate}
+- How many feet of Gutter on your home?: ${gutterLengthText}
+- Number of stories the home is?: ${storiesText}
+- When were the gutters last cleaned?: ${lastCleanedText}
+- Does the home have Gutter Guards?: ${gutterGuardsText}
+
+What to Expect:
+${whatToExpectContent}`;
+
+      const emailBody = encodeURIComponent(body);
+      const emailSubject = encodeURIComponent(subject);
+
+      if (method === 'email') {
+        window.location.href = `mailto:?subject=${emailSubject}&body=${emailBody}`;
+      } else if (method === 'sms') {
+        const userAgent = navigator.userAgent || navigator.vendor;
+        if (/android/i.test(userAgent)) {
+          window.location.href = `sms:?body=${emailBody}`;
+        } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+          window.location.href = `sms:&body=${emailBody}`;
+        } else {
+          window.location.href = `mailto:?subject=${emailSubject}&body=${emailBody}`;
+        }
+      }
+
+      // Close the modal
+      document.getElementById('shareModal').style.display = 'none';
+    }
+
+    function contactUs() {
+      const modal = document.getElementById('contactModal');
+      const instance = M.Modal.getInstance(modal);
+      if (instance) {
+        instance.open();
+      } else {
+        console.error('Modal instance not found');
+        M.toast({ html: 'Error opening contact form. Please try again.' });
+      }
+    }
+
+    function submitContactInfo() {
+      const userName = document.getElementById('userName').value.trim();
+      const userEmail = document.getElementById('userEmail').value.trim();
+      const userPhone = document.getElementById('userPhone').value.trim();
+      const gutterLengthText = document.querySelector("#gutterLength option:checked").text;
+      const storiesText = document.querySelector("#stories option:checked").text;
+      const lastCleanedText = document.querySelector("#lastCleaned option:checked").text;
+      const gutterGuardsText = document.querySelector("#gutterGuards option:checked").text;
+      const estimate = document.getElementById('estimate').innerText;
+      const maintenancePlan = document.getElementById('interestedInPlan').checked ? "Yes" : "No";
+
+      // Basic validation
+      if (!userName || !userEmail || !userPhone) {
+        M.toast({ html: 'Please fill out all contact fields.' });
+        return;
+      }
+
+      const payload = {
+        name: userName,
+        email: userEmail,
+        phone: userPhone,
+        gutterLength: gutterLengthText,
+        stories: storiesText,
+        lastCleaned: lastCleanedText,
+        gutterGuards: gutterGuardsText,
+        estimate: estimate,
+        maintenancePlan: maintenancePlan
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbyQHotrGeA8Ud5vT9GcDF3mLitUCOasCKxfF2PU29nvZTHbYWXtj3dH-dhjZrcV0kCA1A/exec", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.result === 'success') {
+            M.toast({ html: 'Submitted successfully!' });
+            const instance = M.Modal.getInstance(document.getElementById('contactModal'));
+            instance.close();
+          } else {
+            M.toast({ html: 'Submission failed: ' + (data.message || 'Unknown error') });
+          }
+        })
+        .catch(error => {
+          M.toast({ html: 'Submission failed: ' + error.message });
+        });
+    }
   </script>
-
-<div class="what-to-expect hidden">
-
-      
-  <h3 class="what-to-expect-title">Congratulations on Receiving Your Estimate!</h3>
-  <p>Now that you have your gutter estimate in hand, it's time to take the next steps toward cleaner, more efficient gutters. Here's what you can expect from our seamless process:</p>
-  <ol class="what-to-expect-list">
-    <li class="what-to-expect-item">
-      <strong class="what-to-expect-strong">Step 1: Contact Us</strong>
-      <p>Ready to get started? Contact us to schedule a convenient time for an assessment. We're here to answer your questions and set up an appointment that works for you.</p>
-    </li>
-    <li class="what-to-expect-item">
-      <strong class="what-to-expect-strong">Step 2: Assessment</strong>
-      <p>Our experienced team will visit your property to assess your gutters thoroughly. During this assessment, we'll provide you with a final, accurate quote based on your specific needs.</p>
-    </li>
-    <li class="what-to-expect-item">
-      <strong class="what-to-expect-strong">Step 3: Immediate Cleaning Option</strong>
-      <p>If you're ready to enhance your gutter system right away, we offer an immediate cleaning option. With your approval, we can efficiently clean your gutters immediately after the assessment, ensuring they are in top-notch condition.</p>
-    </li>
-  </ol>
-  <p>Don't hesitate to get in touch with any questions or to schedule your assessment. We're here to make your gutter maintenance hassle-free and effective.</p>
-<p>This is an estimate and not a quote. Legacy Gutter Solutions may need to adjust the price depending upon an assessment of the job. No work will be performed until the customer agrees upon the final price.</p>
- </div>
-  <!-- Adding a Contact Us button -->
-     <div class="Contact-us-today hidden">
-    <button class="btn waves-effect waves-light custom-btn" onclick="contactUs()">Contact Us Today</button>
-     </div>
-</div>
-<!-- Adding the COntact Us Form -->
-<div id="contactModal" class="modal">
-  <div class="modal-content">
-    <h4>Contact Information</h4>
-    <div class="input-field">
-      <input id="userName" type="text" class="validate">
-      <label for="userName">Name</label>
-    </div>
-    <div class="input-field">
-      <input id="userEmail" type="email" class="validate">
-      <label for="userEmail">Email</label>
-    </div>
-    <div class="input-field">
-      <input id="userPhone" type="tel" class="validate">
-      <label for="userPhone">Phone Number</label>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn waves-effect waves-light custom-btn" onclick="submitContactInfo()">Submit</button>
-  </div>
-</div>
-    
 </body>
 </html>
