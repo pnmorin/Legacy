@@ -115,6 +115,20 @@
     <button class="btn waves-effect waves-light custom-btn" onclick="contactUs()">Contact Us Today</button>
       <button class="btn waves-effect waves-light custom-btn" onclick="document.getElementById('shareModal').style.display='block'">Share</button>
 
+      <div id="maintenancePlanOffer" class="what-to-expect hidden">
+        <h4>Want Cleaner Gutters Year-Round?</h4>
+        <p>Join our affordable <strong>Gutter Maintenance Plan</strong> and enjoy:</p>
+        <ul class="browser-default">
+          <li>✅ Two or more cleanings per year</li>
+          <li>✅ Priority scheduling during busy seasons</li>
+          <li>✅ 10% off repairs and upgrades</li>
+        </ul>
+        <label>
+          <input type="checkbox" id="interestedInPlan" />
+          <span>Yes, tell me more about the Maintenance Plan</span>
+        </label>
+      </div>
+
 
 <!-- Modal-like HTML at the end of the body -->
 <div id="shareModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); z-index:1000;">
@@ -271,30 +285,6 @@ function shareQuote() {
   }
 }
 
-function contactUs() {
-  const gutterLengthText = document.querySelector("#gutterLength option:checked").text;
-  const storiesText = document.querySelector("#stories option:checked").text;
-  const lastCleanedText = document.querySelector("#lastCleaned option:checked").text;
-  const gutterGuardsText = document.querySelector("#gutterGuards option:checked").text;
-  const estimate = document.getElementById('estimate').innerText;
-
-  const subject = 'Contact Request for Gutter Cleaning';
-  const body = `Dear Legacy Gutter Solutions,
-
-I'm interested in scheduling a gutter cleaning. Below are the details from my estimate:
-
-- How many feet of Gutter on your home? ${gutterLengthText}
-- Number of stories the home is? ${storiesText}
-- When were the gutters last cleaned? ${lastCleanedText}
-- Does the home have Gutter Guards? ${gutterGuardsText}
-- Estimated Cost: ${estimate}
-
-Please contact me to schedule an assessment and to finalize the quote.
-
-Thank you!`;
-
-  location.href = `mailto:info@legacygutter.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
 
 function contactUs() {
   var instance = M.Modal.getInstance(document.getElementById('contactModal'));
@@ -325,7 +315,7 @@ function submitContactInfo() {
     maintenancePlan: maintenancePlan
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbxh2yJF6L2R1qtnjzMA2XuNU9E6D8tBBCJ4IWui7b23Cq7zy5f0E3v0v7zka62w768evg/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyQHotrGeA8Ud5vT9GcDF3mLitUCOasCKxfF2PU29nvZTHbYWXtj3dH-dhjZrcV0kCA1A/exec",{
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -346,19 +336,7 @@ function submitContactInfo() {
   </script>
 
 <div class="what-to-expect hidden">
-    <div id="maintenancePlanOffer" class="what-to-expect hidden">
-        <h4>Want Cleaner Gutters Year-Round?</h4>
-        <p>Join our affordable <strong>Gutter Maintenance Plan</strong> and enjoy:</p>
-        <ul class="browser-default">
-          <li>✅ Two or more cleanings per year</li>
-          <li>✅ Priority scheduling during busy seasons</li>
-          <li>✅ 10% off repairs and upgrades</li>
-        </ul>
-        <label>
-          <input type="checkbox" id="interestedInPlan" />
-          <span>Yes, tell me more about the Maintenance Plan</span>
-        </label>
-      </div>
+
       
   <h3 class="what-to-expect-title">Congratulations on Receiving Your Estimate!</h3>
   <p>Now that you have your gutter estimate in hand, it's time to take the next steps toward cleaner, more efficient gutters. Here's what you can expect from our seamless process:</p>
